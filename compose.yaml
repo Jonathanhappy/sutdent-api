@@ -1,0 +1,29 @@
+services:
+  oracle:
+    image: gvenzl/oracle-xe:21
+    container_name: oracleDB
+    restart: always
+    ports:
+      - '1522:1521'
+    environment:
+      ORACLE_DB: college
+      ORACLE_USER: hr
+      ORACLE_PASSWORD: oracle
+
+  postgres:
+    image: postgres
+    container_name: postgresDB
+    restart: always
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_DB: college
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+
+  adminer:
+    image: adminer
+    container_name: adminerMGR
+    restart: always
+    ports:
+      - 8091:8080
