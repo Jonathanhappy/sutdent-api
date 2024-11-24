@@ -29,5 +29,20 @@ public class StudentController {
         return studentservice.createStudent(student);
     }
 
+    @GetMapping("{idStudent}")
+    public Student getStudentById(@PathVariable int idStudent){
+        return studentservice.getStudentById(idStudent);
+    }
+
+    @DeleteMapping("{idStudent}")
+    public String deleteStudentById(@PathVariable("idStudent") int id){
+        return studentservice.deletetStudentById(id);
+    }
+
+    @PutMapping("{idStudent}")
+    public Student editStudentById(@PathVariable int idStudent, @RequestBody Student newstudent){
+        return studentservice.editStudentById(idStudent, newstudent);
+    }
+
 
 }
