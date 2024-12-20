@@ -29,9 +29,8 @@ public class StudentService {
         if (optionalStudent.isEmpty()){
             throw new RuntimeException("Can't Delete : Student don't exist");
         }
-
         Optional<Result> note = resultrepository.findByStudent(optionalStudent);
-        resultrepository.delete(note.get());
+        note.ifPresent(resultrepository::delete);
 
         studentrepository.delete(optionalStudent.get());
         return "Student Delete successfully";

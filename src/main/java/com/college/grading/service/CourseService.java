@@ -39,7 +39,7 @@ public class CourseService {
         }
 
         Optional<Result> note = resultrepository.findByCourse(optionalCourse);
-        resultrepository.delete(note.get());
+        note.ifPresent(resultrepository::delete);
 
         courserepository.delete(optionalCourse.get());
         return "Course Delete successfully";
