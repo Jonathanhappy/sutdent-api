@@ -9,22 +9,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 @RequestMapping("api/v1/students")
 public class StudentController {
     private final StudentService studentservice;
 
-    @GetMapping("/hello")
-    public String sayHallo(){
-        return "Hallo Student";
-    }
 
-    @GetMapping("/allStudent")
+    @GetMapping("/student_list")
     public List<Student> getAllStudents(){
         return studentservice.getAllStudents();
     }
 
-    @PostMapping
+    @PostMapping("/student_add")
     public Student createStudent(@RequestBody Student student){
         return studentservice.createStudent(student);
     }

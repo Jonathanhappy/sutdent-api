@@ -1,6 +1,8 @@
 package com.college.grading.service;
 
+import com.college.grading.model.Result;
 import com.college.grading.model.Student;
+import com.college.grading.repository.ResultRepository;
 import com.college.grading.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class StudentService {
     private final StudentRepository studentrepository;
+    private final ResultRepository resultrepository;
 
     public Student getStudentById(int idStudent) {
         Optional<Student> optionalStudent = studentrepository.findById(idStudent);
@@ -26,6 +29,10 @@ public class StudentService {
         if (optionalStudent.isEmpty()){
             throw new RuntimeException("Can't Delete : Student don't exist");
         }
+
+        Optional<Result> note = resultrepository.findByStudent(optionalStudent);
+        resultrepository.delete(note.get());
+
         studentrepository.delete(optionalStudent.get());
         return "Student Delete successfully";
     }
